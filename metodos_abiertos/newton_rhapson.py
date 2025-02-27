@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from math import *
+#from math import *
 from tabulate import tabulate
 import sympy as sp
 
@@ -80,7 +80,7 @@ if __name__ == "__main__":
     y_vals = [f(xi) for xi in x_vals]
     
     plt.figure(figsize=(10, 6))
-    plt.plot(x_vals, y_vals, label='f(x) = e^x - 3x²')
+    plt.plot(x_vals, y_vals)
     plt.axhline(y=0, color='k', linestyle='-', alpha=0.3)
     plt.axvline(x=0, color='k', linestyle='-', alpha=0.3)
     plt.grid(alpha=0.3)
