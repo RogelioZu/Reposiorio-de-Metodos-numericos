@@ -39,6 +39,7 @@ def secante(f, x0, x1 ,imax ,tol):
             print(f'{n :<5}  {x:<15.10f}  {f(x):<15.10f} {ccn:<15.10f}')
 
         if ccn < tol:
+            print("solucion aproximada: ")
             cumple = True
         
         xanterior = x
