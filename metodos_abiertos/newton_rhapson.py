@@ -4,9 +4,10 @@ import matplotlib.pyplot as plt
 from tabulate import tabulate
 import sympy as sp
 
+
 def f(x):
     return x**3 + 2*x**2 + 10*x -20
-
+#Funcion para calcular la derivada de una funcion (sin tenerla que hacerla manualmente)
 def derivada(funcion_original):
 
     x = sp.Symbol('x')
@@ -19,16 +20,20 @@ def derivada(funcion_original):
     
     return funcion_derivada
 
+#funcion del metodo, que recibe un punto inicial, tolerencia y numero de maximas iteraciones
 def newton_raphson(f, x0, tol=1e-6, max_iter=100):
 
+    #aqui se calcula la derivada
     df = derivada(f)
     x = x0
     iteraciones = 0
+    #esta variable va guardando los valores que va tomando x 
     historico = [x0]
     
     tabla_datos = []
     
     while iteraciones < max_iter:
+        #evaluamos en cada iteracion x en la funcion y su derivada
         f_valor = f(x)
         df_valor = df(x)
         
@@ -42,10 +47,11 @@ def newton_raphson(f, x0, tol=1e-6, max_iter=100):
             print("Advertencia: Derivada cercana a cero. Posible divergencia.")
             break
         
+        #aqui se aplica la formula del metodo
         x_nuevo = x - f_valor / df_valor
         
         historico.append(x_nuevo)
-        
+        #si legamos a la tolerancia entonces paramos
         if abs(x_nuevo - x) < tol:
             error = abs(x_nuevo - x)
             tabla_datos.append([iteraciones + 1, x_nuevo, f(x_nuevo), df(x_nuevo), error])
@@ -63,6 +69,8 @@ if __name__ == "__main__":
     x0 = 2
     
     raiz, iteraciones, historico, tabla_datos = newton_raphson(f, x0)
+
+    #Aqui se hace la tabulacion usando la libreria tabulate
     
     headers = ["Iteración", "Valor de x", "f(x)", "f'(x)", "Error |xᵢ - xᵢ₋₁|"]
     print("\nTabla de iteraciones del método de Newton-Raphson:")
@@ -78,6 +86,8 @@ if __name__ == "__main__":
     
     x_vals = np.linspace(raiz-3, raiz+3, 1000)
     y_vals = [f(xi) for xi in x_vals]
+
+    #la graficacion con matplotlib
     
     plt.figure(figsize=(10, 6))
     plt.plot(x_vals, y_vals)
