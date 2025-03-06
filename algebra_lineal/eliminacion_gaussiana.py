@@ -2,10 +2,11 @@ import numpy as np
 
 def eliminacion(A,b):
     n = len(A)
-
+    
     det = np.linalg.det(A)
     if det < 1e-11:
-        return "Determinate 0 "
+        
+        print("Determinate 0 o negativo", det)
     
     for i in range(n):
         #metodo de pivoteo
@@ -25,7 +26,15 @@ def eliminacion(A,b):
     return x
 
 if __name__ == '__main__':
+    A = np.array([[2, 3, -3], [3, -4, 3], [2, -4, -2]])
+    b = np.array([5, 8, 6])
 
-    A = np.array([[2,4,6], [4,5,6],[3,1,-2]])
-    b = np.array([18,24,4])
-    print(eliminacion(A,b))
+    print("Matriz original A:")
+    print(A)
+    print("Vector b:")
+    print(b)
+
+    
+    x = eliminacion(A.copy(),b.copy())
+    print("Vector Solucion del sistema:", x)
+    print("verificacion", np.dot(A,x))
