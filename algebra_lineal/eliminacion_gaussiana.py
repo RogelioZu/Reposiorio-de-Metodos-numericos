@@ -26,8 +26,11 @@ def eliminacion(A,b):
     return x
 
 if __name__ == '__main__':
-    A = np.array([[2, 3, -3], [3, -4, 3], [2, -4, -2]])
-    b = np.array([5, 8, 6])
+    A = np.array([[4, 1, -1], 
+                  [-1, 3, 2], 
+                  [1, 1, 5]])
+    
+    b = np.array([7, 3, 10])
 
     print("Matriz original A:")
     print(A)
