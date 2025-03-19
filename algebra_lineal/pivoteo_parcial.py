@@ -30,6 +30,8 @@ def eliminacion_pivoteo_parcial(A, b):
             print(f"Error: Elemento pivote en la fila {i} es cercano a cero.")
             return None
         
+
+        
         #Proceso de eliminacion
         for j in range(i + 1, n):
             factor = Ab[j, i] / Ab[i, i]
@@ -47,13 +49,16 @@ def eliminacion_pivoteo_parcial(A, b):
     return x
 
 if __name__ == '__main__':
-    A = np.array([[2, 3, -3], [3, -4, 3], [2, -4, -2]])
-    b = np.array([5, 8, 6])
+    A = np.array([[4, 1, -1], 
+                  [-1, 3, 2], 
+                  [1, 1, 5]])
     
-    print("Matriz original A:")
-    print(A)
-    print("Vector b:")
-    print(b)
+    b = np.array([7, 3, 10])
+    
+    #print("Matriz original A:")
+    #print(A)
+    #print("Vector b:")
+    #print(b)
     
     x = eliminacion_pivoteo_parcial(A.copy(), b.copy())
     

@@ -1,8 +1,8 @@
-
 import numpy as np
 from tabulate import tabulate
 
-def jacobi(A,b,max_iter,x0 =None , tol= 1e-11):
+#parecido al metodo de jacobi
+def gauss_seidel(A,b,max_iter,x0 =None , tol= 1e-11):
     resultados = []
     n = len(b)
     
@@ -36,9 +36,10 @@ def jacobi(A,b,max_iter,x0 =None , tol= 1e-11):
         # Calcular la nueva aproximación: x^(k+1) = D^(-1) * (b - R * x^(k))
         #Bueno de otra forma
         #x_nuevo = np.dot(D_inv, (b - np.dot(R, x_anterior)))
-        x_nuevo[0] = (b[0]- A[0][1]* x_anterior[1] - A[0][2]* x_anterior[2])/A[0][0]
-        x_nuevo[1] = (b[1]- A[1][0]* x_anterior[0] - A[1][2]* x_anterior[2])/A[1][1]
-        x_nuevo[2] = (b[2]- A[2][0]* x_anterior[0] - A[2][1]* x_anterior[1])/A[2][2]
+        #Aqui viene el cambio con respecto al de jacobi, envez de usar x anterior usamos x nuevo 
+        x_nuevo[0] = (b[0]- A[0][1]* x_nuevo[1] - A[0][2]* x_nuevo[2])/A[0][0]
+        x_nuevo[1] = (b[1]- A[1][0]* x_nuevo[0] - A[1][2]* x_nuevo[2])/A[1][1]
+        x_nuevo[2] = (b[2]- A[2][0]* x_nuevo[0] - A[2][1]* x_nuevo[1])/A[2][2]
 
 
          # Calcular el error (norma de la diferencia)
@@ -67,7 +68,7 @@ if __name__ == '__main__':
     
     b = np.array([500, 200, 30])
 
-    solucion, iteraciones, error = jacobi(A, b,30)
+    solucion, iteraciones, error = gauss_seidel(A, b,30)
     
     print(f"Solución: {solucion}")
     print(f"Iteraciones: {iteraciones}")
