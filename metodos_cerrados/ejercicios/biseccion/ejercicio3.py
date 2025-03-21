@@ -1,25 +1,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from tabulate import tabulate
+from numpy import exp
 
 def f(x):
     """Función objetivo a encontrar su raíz."""
-    return x**3 + 2*x**2 + 10*x - 20
+    return np.atan(x) - (2*x/(1 + x**2))
 
 def biseccion(a, b, tol, max_iter):
-    """
-    Método de bisección para encontrar la raíz de una función.
-    
-    Parámetros:
-    a, b: Límites del intervalo inicial
-    tol: Tolerancia para el error relativo
-    max_iter: Número máximo de iteraciones
-    
-    Retorna:
-    xr: Aproximación de la raíz
-    iter_count: Número de iteraciones realizadas
-    tabla_datos: Datos tabulados de las iteraciones
-    """
+   
     xi = a
     xu = b
     xr_anterior = 0
@@ -143,4 +132,4 @@ def ejecutar_biseccion(a, b, tol, max_iter):
     plt.show()
 
 if __name__ == '__main__':
-    ejecutar_biseccion(1, 2, 5e-11, 50)
+    ejecutar_biseccion(0, 1.5, 5e-11, 50)

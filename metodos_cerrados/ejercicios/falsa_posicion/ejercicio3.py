@@ -1,14 +1,11 @@
-#from math import exp
-#from math import atan
+
 import numpy as np
 import matplotlib.pyplot as plt
 from tabulate import tabulate
 
 def f(x):
-    return x**3 + 2*x**2 + 10*x -20
-    #x**3 + 2*x**2 + 10*x -20
-    #atan(x) - (2*x / (1 + x**2))
-
+    return -0.5*x**2 + 2.5*x + 4.5
+   
 
 def falsa_posicion(a,b,tol,iter):
     xi = a
@@ -107,7 +104,5 @@ def falsa_posicion(a,b,tol,iter):
         plt.show()
 
 if __name__ == '__main__':
-    print(f"f(0.1) = {f(0.1)}")
-    print(f"f(1.5) = {f(1.5)}")
-    print("-----------------------------------------------------------------------------------")
-    falsa_posicion(0.1, 1.5, 5e-11, 50)
+  
+    falsa_posicion(5, 10, 5e-18, 50)

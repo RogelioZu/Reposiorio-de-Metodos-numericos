@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from tabulate import tabulate
 
 def f(x):
-    return x**3 + 2*x**2 + 10*x -20
+    return np.atan(x) - (2*x / (1 + x**2))
     #x**3 + 2*x**2 + 10*x -20
     #atan(x) - (2*x / (1 + x**2))
 
@@ -107,7 +107,5 @@ def falsa_posicion(a,b,tol,iter):
         plt.show()
 
 if __name__ == '__main__':
-    print(f"f(0.1) = {f(0.1)}")
-    print(f"f(1.5) = {f(1.5)}")
-    print("-----------------------------------------------------------------------------------")
-    falsa_posicion(0.1, 1.5, 5e-11, 50)
+  
+    falsa_posicion(0.1, 1.5, 5e-18, 50)

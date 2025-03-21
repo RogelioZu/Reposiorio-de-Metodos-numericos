@@ -6,7 +6,7 @@ from tabulate import tabulate
 
 # Función a evaluar
 def f(x):
-    return x**3 + 2*x**2 + 10*x -20
+    return -0.5*x**2 + 2.5*x + 4.5
 
 # Algoritmo de la secante
 def secante(f, x0, x1 ,imax ,tol):
@@ -55,8 +55,8 @@ def secante(f, x0, x1 ,imax ,tol):
 
 def main():
     # Valores iniciales
-    x0 = 1
-    x1 = 2
+    x0 = 5
+    x1 = 10
     iteraciones = 30
     tol = 5e-11
     # Llamada al algoritmo

@@ -1,13 +1,11 @@
-#from math import exp
+from numpy import exp
 #from math import atan
 import numpy as np
 import matplotlib.pyplot as plt
 from tabulate import tabulate
 
 def f(x):
-    return x**3 + 2*x**2 + 10*x -20
-    #x**3 + 2*x**2 + 10*x -20
-    #atan(x) - (2*x / (1 + x**2))
+    return exp(x) - 1 - x - ((x**2)/2)
 
 
 def falsa_posicion(a,b,tol,iter):
@@ -99,15 +97,16 @@ def falsa_posicion(a,b,tol,iter):
         plt.ylabel('f(x)', fontsize=12)
         plt.legend(loc='best', fontsize=10, facecolor='white', edgecolor='gray', framealpha=0.9)
         plt.tight_layout()
+
         print(f"\nResumen:")
         print(f"  * Raíz aproximada: {xr:.30f}")
         print(f"  * Valor de f(x) en la raíz: {f(xr):.10e}")
         print(f"  * Número de iteraciones: {i + 1}")
-        print(f"  * Error relativo final: {tabla_datos[i][5]:.10e}")
+        print(f"  * Error relativo final: {tabla_datos[i][7]:.10e}")
         plt.show()
 
 if __name__ == '__main__':
     print(f"f(0.1) = {f(0.1)}")
     print(f"f(1.5) = {f(1.5)}")
     print("-----------------------------------------------------------------------------------")
-    falsa_posicion(0.1, 1.5, 5e-11, 50)
+    falsa_posicion(0, 0.5, 5e-11, 50)
