@@ -1,32 +1,7 @@
 import numpy as np
 
 def metodo_potencia_simple(A, tol=1e-10, max_iter=1000, verbose=False):
-    """
-    Implementación del método de la potencia simple para encontrar el valor
-    característico dominante y su vector característico asociado.
-    
-    Parámetros:
-    -----------
-    A : numpy.ndarray
-        Matriz cuadrada de la cual se desea obtener el valor característico dominante
-    tol : float, opcional
-        Tolerancia para determinar la convergencia (por defecto 1e-10)
-    max_iter : int, opcional
-        Número máximo de iteraciones (por defecto 1000)
-    verbose : bool, opcional
-        Si es True, muestra información sobre cada iteración (por defecto False)
-    
-    Retorna:
-    --------
-    lambda_k : float
-        Aproximación del valor característico dominante
-    x_k : numpy.ndarray
-        Aproximación del vector característico asociado
-    n_iter : int
-        Número de iteraciones realizadas
-    historia : list
-        Lista con los valores característicos estimados en cada iteración
-    """
+   
     # Obtener dimensión de la matriz
     n = A.shape[0]
     
@@ -75,10 +50,16 @@ def metodo_potencia_simple(A, tol=1e-10, max_iter=1000, verbose=False):
 if __name__ == "__main__":
     # Crear una matriz de ejemplo
     A = np.array([
-        [2, 1, 1],
-        [1, 2, 1],
-        [1, 1, 2]
-    ])
+    [10,  2,  0,  1,  0,  0,  0,  0,  3],
+    [ 2,  8,  4,  0,  0,  0,  0,  0,  0],
+    [ 0,  4,  6,  5,  0,  0,  0,  0,  0],
+    [ 1,  0,  5, 12,  3,  0,  0,  0,  0],
+    [ 0,  0,  0,  3,  9,  1,  0,  0,  0],
+    [ 0,  0,  0,  0,  1,  7,  2,  0,  0],
+    [ 0,  0,  0,  0,  0,  2, 15,  4,  0],
+    [ 0,  0,  0,  0,  0,  0,  4, 11,  5],
+    [ 3,  0,  0,  0,  0,  0,  0,  5, 13]
+])
     
     # Establecer una semilla para reproducibilidad
     np.random.seed(42)

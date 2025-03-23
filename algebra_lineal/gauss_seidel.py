@@ -1,75 +1,92 @@
 import numpy as np
 from tabulate import tabulate
 
-#parecido al metodo de jacobi
-def gauss_seidel(A,b,max_iter,x0 =None , tol= 1e-11):
-    resultados = []
+def gauss_seidel(A, b, max_iter, x0=None, tol=1e-11):
+   
+   
+    # Obtener la dimensión del sistema
     n = len(b)
     
+    # Inicializar vector de solución inicial
     if x0 is None:
         x0 = np.zeros(n)
-
-    #Vectores para guardar la solucion
+    
+    # Vectores para guardar la solución
     x_nuevo = np.copy(x0)
     x_anterior = np.copy(x0)
-    #inicializamos el error y contador en 0
+    
+    # Inicializamos el error y estructuras para resultados
     error = 0
-    cont = 0
+    resultados = []
+    
+    # Verificar si la matriz es diagonalmente dominante
+    es_dominante = True
     for i in range(n):
-        diagonal = abs(A[i,i])
-        suma_fila = 0
-        for j in range(n):
-            if i != j:
-                suma_fila += abs(A[i][j])
-        if diagonal >= suma_fila:
-            cont += 1  
-    if cont == 3:
-            print("Matriz Diagonalmente dominante")
+        diagonal = abs(A[i, i])
+        suma_fila = sum(abs(A[i, j]) for j in range(n) if i != j)
+        if diagonal < suma_fila:
+            es_dominante = False
+            break
+    
+    if es_dominante:
+        print("Matriz diagonalmente dominante")
     else:
-            print("otro caso")
+        print("Matriz no es diagonalmente dominante (puede que no converja)")
+    
+    # Crear encabezados dinámicos para la tabla de resultados
+    headers = ["n. iter"] + [f"x{i+1}" for i in range(n)] + ["error"]
+    
+    # Bucle principal del método de Gauss-Seidel
+    for iteracion in range(max_iter):
+        # Guardar resultado de la iteración actual
+        resultado_iter = [iteracion] + list(x_nuevo) + [error]
+        resultados.append(resultado_iter)
+        
+        # Implementación del método de Gauss-Seidel
+        for i in range(n):
+            suma = 0
+            for j in range(n):
+                if i != j:
+                    suma += A[i, j] * x_nuevo[j]
             
-
-
-    for i in range(max_iter):
-
-        resultados.append([i, x_nuevo[0], x_nuevo[1], x_nuevo[2], error])
-        # Calcular la nueva aproximación: x^(k+1) = D^(-1) * (b - R * x^(k))
-        #Bueno de otra forma
-        #x_nuevo = np.dot(D_inv, (b - np.dot(R, x_anterior)))
-        #Aqui viene el cambio con respecto al de jacobi, envez de usar x anterior usamos x nuevo 
-        x_nuevo[0] = (b[0]- A[0][1]* x_nuevo[1] - A[0][2]* x_nuevo[2])/A[0][0]
-        x_nuevo[1] = (b[1]- A[1][0]* x_nuevo[0] - A[1][2]* x_nuevo[2])/A[1][1]
-        x_nuevo[2] = (b[2]- A[2][0]* x_nuevo[0] - A[2][1]* x_nuevo[1])/A[2][2]
-
-
-         # Calcular el error (norma de la diferencia)
+            x_nuevo[i] = (b[i] - suma) / A[i, i]
+        
+        # Calcular el error (norma de la diferencia)
         error = np.linalg.norm(x_nuevo - x_anterior)
         
-
-         # Verificar convergencia
+        # Verificar convergencia
         if error < tol:
-             #Aqui tabulamos bro
-            print(tabulate(resultados, headers=["n. iter", "x1", "x2", "x3", "error"],tablefmt="pretty",floatfmt=".6f"))
-            return x_nuevo, i + 1, error
+            print(tabulate(resultados, headers=headers, tablefmt="pretty", floatfmt=".6f"))
+            return x_nuevo, iteracion + 1, error
         
         # Actualizar x para la próxima iteración
         x_anterior = np.copy(x_nuevo)
     
     # Si se alcanza el número máximo de iteraciones
-    #Aqui tabulamos bro
-    print(tabulate(resultados, headers=["n. iter", "x1", "x2", "x3"],tablefmt="pretty",floatfmt=".6f"))
+    print(tabulate(resultados, headers=headers, tablefmt="pretty", floatfmt=".6f"))
     return x_nuevo, max_iter, error
 
 if __name__ == '__main__':
-
-    A = np.array([[17, -2, -3], 
-                  [-5, 21, -2], 
-                  [-5, -5, 22]])
+    # Sistema de ecuaciones nxn
+    A = np.array([
+    [20, 2, 1, -3, 1, 2, -1, 0, 1],
+    [3, 25, 2, 1, -2, 0, 1, -1, 0],
+    [1, 3, 22, 2, 1, -2, 0, 1, -1],
+    [-2, 1, 3, 28, 2, 1, -1, 0, 1],
+    [0, -2, 1, 4, 30, 2, 1, -1, 0],
+    [1, 0, -2, 1, 3, 26, 2, 1, -1],
+    [-1, 1, 0, -2, 1, 3, 24, 2, 1],
+    [0, -1, 1, 0, -2, 1, 3, 22, 2],
+    [1, 0, -1, 1, 0, -2, 1, 3, 21]
+])
+     
+    b = np.array([100, 120, 110, 130, 140, 125, 115, 105, 95])
     
-    b = np.array([500, 200, 30])
-
-    solucion, iteraciones, error = gauss_seidel(A, b,30)
     
-    print(f"Solución: {solucion}")
+    solucion, iteraciones, error = gauss_seidel(A, b, 100)
+    
+    print(f"\nSolución: {solucion}")
     print(f"Iteraciones: {iteraciones}")
     print(f"Error final: {error}")
+    
+   

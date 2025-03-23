@@ -68,11 +68,19 @@ def verificar_solucion(A_original, x, b_original, tol=1e-8):
 
 if __name__ == '__main__':
     # Ejemplo del sistema original
-    A = np.array([[4, 1, -1], 
-                  [-1, 3, 2], 
-                  [1, 1, 5]])
+    A = np.array([
+    [2, 3, -1, 2, 0, 0, 1, 0, 0],
+    [1, 2, 3, 0, -1, 0, 0, 1, 0],
+    [0, 1, 2, 3, 0, -1, 0, 0, 1],
+    [0, 0, 1, 2, 3, 0, -1, 0, 0],
+    [1, 0, 0, 1, 2, 3, 0, -1, 0],
+    [0, 1, 0, 0, 1, 2, 3, 0, -1],
+    [-1, 0, 1, 0, 0, 1, 2, 3, 0],
+    [0, -1, 0, 1, 0, 0, 1, 2, 3],
+    [3, 0, -1, 0, 1, 0, 0, 1, 2]
+])
     
-    b = np.array([7, 3, 10])
+    b = np.array([5, 8, 9, 7, 10, 6, 11, 12, 9])
 
     print("Matriz original A:")
     print(A)
@@ -97,15 +105,4 @@ if __name__ == '__main__':
         print(x_numpy)
         print(f"Diferencia m�xima: {np.max(np.abs(x - x_numpy))}")
     
-    # Ejemplo con matriz mal condicionada
-    print("\n--- Ejemplo con matriz mal condicionada ---")
-    A_singular = np.array([[1, 2, 3], 
-                          [2, 4, 6], 
-                          [3, 5, 7]])  # Segunda fila \u2248 2*(primera fila)
-    b_singular = np.array([6, 12, 15])
     
-    x_singular = eliminacion_gaussiana(A_singular, b_singular)
-    if x_singular is None:
-        print("Correctamente detect� matriz singular")
-    else:
-        print("No detect� matriz singular correctamente")
