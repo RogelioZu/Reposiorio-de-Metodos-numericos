@@ -1,11 +1,11 @@
 import numpy as np
 from tabulate import tabulate
 
-def jacobi(A, b, max_iter, x0=None, tol=1e-11):
+def jacobi(A, b, max_iter, x0=None, tol=0.05):
    
     # Obtener la dimensión del sistema
     n = len(b)
-    
+    x0 = [0.7, -1.6, 0.6]
     # Inicializar vector de solución inicial
     if x0 is None:
         x0 = np.zeros(n)
@@ -105,17 +105,12 @@ def jacobi(A, b, max_iter, x0=None, tol=1e-11):
 if __name__ == '__main__':
     # Ejemplo original
     A = np.array([
-    [20, 2, 1, -3, 1, 2, -1, 0, 1],
-    [3, 25, 2, 1, -2, 0, 1, -1, 0],
-    [1, 3, 22, 2, 1, -2, 0, 1, -1],
-    [-2, 1, 3, 28, 2, 1, -1, 0, 1],
-    [0, -2, 1, 4, 30, 2, 1, -1, 0],
-    [1, 0, -2, 1, 3, 26, 2, 1, -1],
-    [-1, 1, 0, -2, 1, 3, 24, 2, 1],
-    [0, -1, 1, 0, -2, 1, 3, 22, 2],
-    [1, 0, -1, 1, 0, -2, 1, 3, 21]
-])
-    b = np.array([100, 120, 110, 130, 140, 125, 115, 105, 95])
+    [10.2,  2.8,  0.7],   
+    [ 1.5,  5,  1.8],
+    [ 2.4,  3.5,  10],
+    ])
+    
+    b = np.array([0.17, -8.7, 6.3], dtype=float)
     
     print("\n" + "*"*50)
     print(" "*10 + "RESOLVIENDO SISTEMA ORIGINAL")

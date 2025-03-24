@@ -4,7 +4,7 @@ from tabulate import tabulate
 
 def f(x):
     """Función objetivo a encontrar su raíz."""
-    return x**3 + 2*x**2 + 10*x - 20
+    return -0.5 * x**2 + 2.5 * x + 4.5
 
 def biseccion(a, b, tol, max_iter):
     """
@@ -39,14 +39,8 @@ def biseccion(a, b, tol, max_iter):
         xr = (xi + xu) / 2
         f_xr = f(xr)
         
-        # Calcular error relativo y porcentual (excepto en primera iteración)
-        if i > 0:
-            error_rel = abs((xr - xr_anterior) / xr)
-            error_porcentual = error_rel * 100
-        else:
-            error_rel = float('inf')
-            error_porcentual = float('inf')
-            
+        # Calcular error relativo (excepto en primera iteración)
+        error_rel = abs((xr - xr_anterior) / xr) if i > 0 else float('inf')
         xr_anterior = xr
         
         # Guardar puntos para la gráfica
@@ -63,13 +57,11 @@ def biseccion(a, b, tol, max_iter):
             xi = xr
             fila = [i, xizq, xr, xu, f_xr]
         
-        # Añadir error relativo y porcentual a la fila
+        # Añadir error relativo a la fila
         if i > 0:
             fila.append(error_rel)
-            fila.append(error_porcentual)
         else:
             fila.append(None)  # No hay error relativo en la primera iteración
-            fila.append(None)  # No hay error porcentual en la primera iteración
         
         # Añadir la fila a la tabla
         tabla_datos.append(fila)
@@ -127,13 +119,12 @@ def ejecutar_biseccion(a, b, tol, max_iter):
     headers = ["Iteración", "Xi", "Xr", "Xu", "f(Xr)"]
     if len(tabla_datos) > 1:  # Si hay más de una iteración
         headers.append("Error Relativo")
-        headers.append("Error Porcentual (%)")
     
     # Preparar los datos para mostrar (sin error relativo en primera iteración)
     tabla_mostrar = []
     for i, fila in enumerate(tabla_datos):
-        if i == 0:  # Primera iteración - omitir el error relativo y porcentual
-            tabla_mostrar.append(fila[:-2])  # Excluir los dos últimos elementos (None)
+        if i == 0:  # Primera iteración - omitir el error relativo
+            tabla_mostrar.append(fila[:-1])  # Excluir el último elemento (None)
         else:
             tabla_mostrar.append(fila)
     
@@ -148,9 +139,8 @@ def ejecutar_biseccion(a, b, tol, max_iter):
     print(f"  * Valor de f(x) en la raíz: {f(xr):.10e}")
     print(f"  * Número de iteraciones: {iter_count + 1}")
     print(f"  * Error relativo final: {tabla_datos[iter_count][5]}")
-    print(f"  * Error porcentual final: {tabla_datos[iter_count][6]:.8f}%")
     
     plt.show()
 
 if __name__ == '__main__':
-    ejecutar_biseccion(1, 2, 5e-11, 50)
+    ejecutar_biseccion(5, 10, 5e-11, 50)

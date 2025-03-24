@@ -5,7 +5,7 @@ import sympy as sp
 
 # Definimos la expresión simbólica
 x_sym = sp.Symbol('x')
-expresion = -0.5 * x_sym**2 + 2.5 *x_sym + 4.5
+expresion = sp.log(x_sym) - (x_sym -2)**2
 
 # Convertimos la expresión en una función numérica
 def f(x):
@@ -18,7 +18,7 @@ def derivada():
     return funcion_derivada
 
 # Función del método, que recibe un punto inicial, tolerancia y número de máximas iteraciones
-def newton_raphson(f, x0, tol=1e-6, max_iter=100):
+def newton_raphson(f, x0, tol=5e-9, max_iter=100):
     # Aquí se calcula la derivada
     df = derivada()
     x = x0
@@ -53,7 +53,7 @@ def newton_raphson(f, x0, tol=1e-6, max_iter=100):
     return x, iteraciones, historico, tabla_datos
 
 if __name__ == "__main__":
-    x0 = 5
+    x0 = 1.5
     raiz, iteraciones, historico, tabla_datos = newton_raphson(f, x0)
     
     # Aquí se hace la tabulación usando la librería tabulate
