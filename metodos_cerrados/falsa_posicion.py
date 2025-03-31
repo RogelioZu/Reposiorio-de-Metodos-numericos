@@ -17,7 +17,7 @@ def falsa_posicion(a,b,tol,iter):
     xr_anterior = 0  # Para calcular el error relativo
     
     # Listas para almacenar los valores para la gráfica
-    xr_points = []
+    xr_points = []  
     yr_points = []
     
     # Lista para almacenar los datos de la tabla

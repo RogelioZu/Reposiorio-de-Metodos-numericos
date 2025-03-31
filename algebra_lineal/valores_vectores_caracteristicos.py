@@ -16,6 +16,7 @@ if __name__ == '__main__':
     [ 3,  0,  0,  0,  0,  0,  0,  5, 13]
 ])
     
+    
     valores, vectores = eigen(A)
     
     print("Valores caracter�sticos:")

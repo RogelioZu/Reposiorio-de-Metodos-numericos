@@ -1,18 +1,7 @@
 import numpy as np
 
 def eliminacion_gaussiana(A, b, tol=1e-10):
-    """
-    Resuelve un sistema de ecuaciones lineales Ax = b usando eliminaci�n gaussiana
-    con pivoteo parcial para mejorar la estabilidad num�rica.
     
-    Par�metros:
-    A (numpy.ndarray): Matriz de coeficientes (n x n)
-    b (numpy.ndarray): Vector de t�rminos independientes (n)
-    tol (float): Tolerancia para detectar singularidades
-    
-    Retorna:
-    numpy.ndarray: Vector soluci�n x, o None si la matriz es singular
-    """
     # Crear copias para no modificar los originales
     A = A.copy().astype(float)
     b = b.copy().astype(float)
@@ -51,58 +40,42 @@ def eliminacion_gaussiana(A, b, tol=1e-10):
     return x
 
 def verificar_solucion(A_original, x, b_original, tol=1e-8):
-    """
-    Verifica la precisi�n de la soluci�n calculada.
-    
-    Par�metros:
-    A_original (numpy.ndarray): Matriz original de coeficientes
-    x (numpy.ndarray): Vector soluci�n calculado
-    b_original (numpy.ndarray): Vector original de t�rminos independientes
-    tol (float): Tolerancia para la verificaci�n
-    
-    Retorna:
-    bool: True si la soluci�n es precisa dentro de la tolerancia
-    """
+   
     residuo = np.linalg.norm(np.dot(A_original, x) - b_original)
     return residuo < tol, residuo
 
 if __name__ == '__main__':
     # Ejemplo del sistema original
     A = np.array([
-    [2, 3, -1, 2, 0, 0, 1, 0, 0],
-    [1, 2, 3, 0, -1, 0, 0, 1, 0],
-    [0, 1, 2, 3, 0, -1, 0, 0, 1],
-    [0, 0, 1, 2, 3, 0, -1, 0, 0],
-    [1, 0, 0, 1, 2, 3, 0, -1, 0],
-    [0, 1, 0, 0, 1, 2, 3, 0, -1],
-    [-1, 0, 1, 0, 0, 1, 2, 3, 0],
-    [0, -1, 0, 1, 0, 0, 1, 2, 3],
-    [3, 0, -1, 0, 1, 0, 0, 1, 2]
+    [3, 2, -1, 1],
+    [2, -3, 4, -1],
+    [1, 1, 2, 3],
+    [5, -2, 3, -4]
 ])
-    
-    b = np.array([5, 8, 9, 7, 10, 6, 11, 12, 9])
+
+    b = np.array([5, -3, 7, 1])
 
     print("Matriz original A:")
     print(A)
     print("Vector b:")
     print(b)
 
-    # Resolver usando nuestra implementaci�n mejorada
+    # Resolver usando nuestra implementacion mejorada
     x = eliminacion_gaussiana(A, b)
     
     if x is not None:
-        print("\nVector soluci�n x (eliminaci�n gaussiana mejorada):")
+        print("\nVector solucion x (eliminacion gaussiana mejorada):")
         print(x)
         
         # Verificar soluci�n
         es_precisa, residuo = verificar_solucion(A, x, b)
-        print(f"Verificaci�n: {'Precisa' if es_precisa else 'Imprecisa'}")
+        print(f"Verificacion: {'Precisa' if es_precisa else 'Imprecisa'}")
         print(f"Residuo: {residuo}")
         
         # Comparar con NumPy para referencia
         x_numpy = np.linalg.solve(A, b)
-        print("\nVector soluci�n x (numpy.linalg.solve para comparaci�n):")
+        print("\nVector solucion x (numpy.linalg.solve para comparacion):")
         print(x_numpy)
-        print(f"Diferencia m�xima: {np.max(np.abs(x - x_numpy))}")
+        print(f"Diferencia maxima: {np.max(np.abs(x - x_numpy))}")
     
     
