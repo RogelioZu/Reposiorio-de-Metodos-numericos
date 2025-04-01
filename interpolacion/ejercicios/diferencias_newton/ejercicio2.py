@@ -128,7 +128,7 @@ def polinomio_diferencias_hacia_adelante(x, y, xo):
 if __name__ == '__main__':
     xi = np.array([2, 2.2, 2.4, 2.6, 2.8, 3])
     fi = np.array([0.5103757, 0.5207843, 0.5104147, 0.4813306, 0.4359160, 0.4067381])
-    polinomio, table, head, coeficientes = polinomio_diferencias_hacia_adelante(xi, fi, 2.5)
+    polinomio, table, head, coeficientes = polinomio_diferencias_hacia_adelante(xi, fi, 2.89)
    
     
     print("\nTabla de diferencias finitas:")
