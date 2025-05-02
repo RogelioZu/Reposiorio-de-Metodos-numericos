@@ -46,11 +46,11 @@ def interpolacion_lagrange(x, y, xi):
 
 if __name__ == '__main__':
     # Valores dados
-    x = np.array([2, 2.2, 2.4, 2.6, 2.8, 3])
-    y = np.array([0.5103757, 0.5207843, 0.5104147, 0.4813306, 0.4359160, 0.4067381])
+    x = np.array([1.5, 2.5 , 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5])
+    y = np.array([31.1, 29.8, 28.45, 26.75, 25.6, 25.15, 24.85, 24.6, 24.35, 24.05])
     
     # Punto a interpolar
-    xi = 2.33
+    xi = 5
     
     # Realizar la interpolación y mostrar resultados
     interpolacion_lagrange(x, y, xi)
