@@ -1,7 +1,7 @@
 import math
 
 def f(x):
-    return math.sqrt(1 - x**3)
+    return math.cos(x**2)
 
 
 
@@ -11,7 +11,7 @@ def regla_trapecio(a,b,n,f):
     h = (b - a) / n
     if n == 1:
         aprox = ((b - a)/ 2) * (f(a) + f (b))
-        
+        print("Con N = 1")
 
     elif n > 1:
         suma_interna = 0
@@ -32,4 +32,4 @@ def regla_trapecio(a,b,n,f):
 
 
 if __name__ == '__main__':
-    print(f"aproximacion de la funcion {regla_trapecio(0, 1, 1, f)}")
+    print(f"aproximacion de la funcion {regla_trapecio(0, math.pi/2, 8, f)}")
