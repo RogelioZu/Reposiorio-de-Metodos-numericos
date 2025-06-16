@@ -1,11 +1,12 @@
 import numpy as np
+import math
 from scipy . interpolate import lagrange
 import matplotlib . pyplot as plt
 from matplotlib . patches import Polygon
 from scipy.integrate import simpson, quad
 
 def f(x):
-    return x
+    return np.sin(x**2)
 
 def regla_simpson38(f,a,b,n):
     h = (b - a) / n
@@ -54,8 +55,8 @@ def grafica_trapecios (f ,a ,b , n ):
     return plt
 
 if __name__ == '__main__':
-    a = 2
-    b = 8
+    a = 0
+    b = math.pi/2
     n = 3
     area = regla_simpson38(f,a,b,n)
 

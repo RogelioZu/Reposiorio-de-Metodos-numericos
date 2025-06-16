@@ -5,7 +5,7 @@ from matplotlib . patches import Polygon
 from scipy.integrate import simpson, quad
 
 def f(x):
-    return x
+    return (np.tan(x))**(1/2)
 
 def regla_simpson38(f,a,b,n):
     h = (b - a) / n
@@ -54,9 +54,9 @@ def grafica_trapecios (f ,a ,b , n ):
     return plt
 
 if __name__ == '__main__':
-    a = 2
-    b = 8
-    n = 3
+    a = 0
+    b = 1
+    n = 9
     area = regla_simpson38(f,a,b,n)
 
     valor_real, error_quad = quad(f, a, b)
